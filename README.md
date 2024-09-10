@@ -3,24 +3,33 @@
 ## Getting Started
 
 ## MakeFile
+
 run all tests
+
 ```bash
 make test
 ```
+
 lint the code
+
 ```bash
 make lint
 ```
+
 run the application in production mode
+
 ```bash
 make run-prod
 ```
+
 run the application in development mode
+
 ```bash
 make run-dev
 ```
 
 ## ENVIRONMENT
+
 ```
 # Stage status to start server:
 #   - "dev", for start server without graceful shutdown
@@ -54,7 +63,6 @@ JWT_SECRET_KEY=
 JWT_EXPIRE_HOUR_COUNT=
 
 # SMTP
-#EMAIL
 SMTP_SERVER=
 SMTP_PORT=
 SMTP_USERNAME=
