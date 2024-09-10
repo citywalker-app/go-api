@@ -16,6 +16,6 @@ RUN go build -o /usr/local/bin/app ./cmd/api/main.go
 EXPOSE 5000
 
 # Run the API
-CMD ENV_FILE=.env.prod app
+CMD app
 
 HEALTHCHECK CMD curl --fail http://localhost:5000/healthcheck || exit 1
