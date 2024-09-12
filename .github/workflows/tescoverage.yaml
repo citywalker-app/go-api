@@ -65,8 +65,8 @@ jobs:
       - name: Create coverage badge
         run: |
           COVERAGE=$(cat coverage.txt | sed 's/%//')
-          curl -o badge.svg "https://img.shields.io/badge/coverage-${COVERAGE}%25-brightgreen"
-          mv badge.svg ./badges/coverage-badge.svg
+          curl -o badge.svg "https://img.shields.io/badge/test coverage-${COVERAGE}%25-brightgreen"
+          mv badge.svg ./badges/test-coverage.svg
 
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v9
