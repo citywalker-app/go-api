@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"os"
 	"strconv"
 
@@ -10,7 +9,6 @@ import (
 
 var d = func() *gomail.Dialer {
 	smtpEmail := os.Getenv("SMTP_SERVER")
-	fmt.Println(os.Getenv("SMTP_PORT"))
 	smtpPort, err := strconv.Atoi(os.Getenv("SMTP_PORT"))
 	if err != nil {
 		panic(err)
