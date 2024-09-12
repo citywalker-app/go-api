@@ -10,13 +10,37 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     environment: production
+    env:
+      STAGE_STATUS: ${{vars.STAGE_STATUS}}
+      SERVER_HOST: ${{secrets.SERVER_HOST}}
+      SERVER_PORT: ${{secrets.SERVER_PORT}}
+      SERVER_READ_TIMEOUT: ${{secrets.SERVER_READ_TIMEOUT}}
+      PREFORK: ${{secrets.PREFORK}}
+      DATABASE: ${{secrets.DATABASE}}
+      DB_HOST: ${{secrets.DB_HOST}}
+      DB_PORT: ${{secrets.DB_PORT}}
+      MDB_DATABASE: ${{secrets.MDB_DATABASE}}
+      MDB_USERNAME: ${{secrets.MDB_USERNAME}}
+      MDB_PASSWORD: ${{secrets.MDB_PASSWORD}}
+      MDB_COLLECTION_USERS: ${{secrets.MDB_COLLECTION_USERS}}
+      MDB_COLLECTION_CITIES: ${{secrets.MDB_COLLECTION_CITIES}}
+      MDB_COLLECTION_TRAVELS: ${{secrets.MDB_COLLECTION_TRAVELS}}
+      JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
+      JWT_EXPIRE_HOUR_COUNT: ${{secrets.JWT_EXPIRE_HOUR_COUNT}}
+      SMTP_SERVER: ${{secrets.SMTP_SERVER}}
+      SMTP_PORT: ${{secrets.SMTP_PORT}}
+      SMTP_USERNAME: ${{secrets.SMTP_USERNAME}}
+      SMTP_PASSWORD: ${{secrets.SMTP_PASSWORD}}
+      REDIS_ADDR: ${{secrets.REDIS_ADDR}}
+      REDIS_PASSWORD: ${{secrets.REDIS_PASSWORD}}
+      REDIS_DB: ${{secrets.REDIS_DB}}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Print all environment variables
-        run: printenv
+      - name: Print
+        run: echo  "$SMTP_PORT"
 
       - name: Set up Go
         uses: actions/setup-go@v4
