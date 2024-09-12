@@ -38,6 +38,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ github.token}}
 
       - name: Print
         run: echo  "$SMTP_PORT"
@@ -60,20 +63,14 @@ jobs:
         run: |
           COVERAGE=$(cat coverage.txt | sed 's/%//')
           curl -o badge.svg "https://img.shields.io/badge/coverage-${COVERAGE}%25-brightgreen"
-
-      - name: Update README with badge
-        run: |
-          COVERAGE=$(cat coverage.txt | sed 's/%//')
-          BADGE_URL="https://img.shields.io/badge/coverage-${COVERAGE}%25-brightgreen"
-          sed -i '/!\[Coverage\](.*)/c\![Coverage]('${BADGE_URL}')' README.md
+          mv badge.svg ./badges/coverage-badge.svg
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          mv badge.svg ./badges/coverage-badge.svg
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add ./badges/coverage-badge.svg
-          git commit -m "style(badge): Update test coverage badge"
+          git commit -m "style(badge): update coverage test badge" || echo "No changes to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ github.token }}
