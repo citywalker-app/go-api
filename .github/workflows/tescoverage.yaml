@@ -71,8 +71,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-           mv badge.svg ./badges/coverage-badge.svg
-          git add coverage-badge.svg
+          mv badge.svg ./badges/coverage-badge.svg
+          git add ./badges/coverage-badge.svg
           git commit -m "style(badge): Update test coverage badge"
           git push
         env:
