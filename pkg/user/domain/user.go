@@ -3,7 +3,6 @@ package userdomain
 import (
 	"time"
 
-	traveldomain "github.com/citywalker-app/go-api/pkg/travel/domain"
 	"github.com/citywalker-app/go-api/utils"
 )
 
@@ -47,6 +46,6 @@ func (u *User) SetPassword(password string) {
 	u.Password = pass
 }
 
-func (u *User) SetTravel(travel traveldomain.Travel) {
-	u.Travels = append(u.Travels, travel.ID)
+func (u *User) SetTravel(travelID string) {
+	u.Travels = append(u.Travels, travelID)
 }
