@@ -19,4 +19,4 @@ test:
 	@echo "Clearing test cache..."
 	@go clean -testcache
 	@echo "Testing..."
-	@ENV_FILE=.env.dev go test ./...
+	@ENV_FILE=../.env.dev go test ./... -coverprofile=coverage.out
