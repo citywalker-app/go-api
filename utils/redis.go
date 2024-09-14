@@ -11,12 +11,7 @@ import (
 	"github.com/gofiber/fiber/v2/log"
 )
 
-type RedisClient interface {
-	Set(ctx context.Context, key string, value interface{}, expiration time.Duration) *redis.StatusCmd
-	Get(ctx context.Context, key string) *redis.StringCmd
-}
-
-var RedisDB = func() RedisClient {
+var RedisDB = func() *redis.Client {
 	db, err := strconv.Atoi(os.Getenv("REDIS_DB"))
 	if err != nil {
 		log.Error("Error converting REDIS_DB to int: %v", err)
