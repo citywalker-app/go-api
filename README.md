@@ -1,5 +1,6 @@
 # CityWalker API
 
+[![CI](https://github.com/citywalker-app/go-api/actions/workflows/tescoverage.yaml/badge.svg)](https://github.com/citywalker-app/go-api/actions/workflows/tescoverage.yaml)
 ![Coverage test](./badges/coverage.svg)
 
 ## Getting Started
