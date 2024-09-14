@@ -1,6 +1,7 @@
 package server
 
 import (
+	userrouter "github.com/citywalker-app/go-api/pkg/user/infrastructure/router"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 )
@@ -8,8 +9,8 @@ import (
 func SetupRoutes(app *fiber.App) {
 	app.Get("/metrics", monitor.New())
 
-	// auth := app.Group("/user")
-	// userrouter.Router(auth)
+	auth := app.Group("/user")
+	userrouter.Router(auth)
 
 	// cities := app.Group("/cities", middleware.JWTHandler(), middleware.RedisHandler())
 	// cityrouter.Router(cities)
