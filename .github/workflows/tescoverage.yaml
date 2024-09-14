@@ -56,6 +56,10 @@ jobs:
       - name: Install dependencies
         run: go mod download
 
+      - uses: KengoTODA/actions-setup-docker-compose@v1
+        with:
+          version: "2.14.2" # the full version of `docker-compose` command
+
       - name: Set up Docker Compose
         run: |
           docker-compose --version
