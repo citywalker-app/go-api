@@ -1,11 +1,10 @@
 package utils
 
 import (
-	"encoding/base64"
 	"fmt"
 	"math/rand"
 	"regexp"
-	"strconv"
+	"time"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -37,16 +36,13 @@ func ComparePassword(hashedPwd, plainPwd string) bool {
 }
 
 func GenerateRandomCode() (string, error) {
-	b := make([]byte, 3)
-	// nolint:gosec
-	if _, err := rand.Read(b); err != nil {
-		return "", err
-	}
+	// Seed the random number generator
+	rand.Seed(time.Now().UnixNano())
 
-	encodedStr := base64.RawStdEncoding.EncodeToString(b)
-	num, err := strconv.Atoi(encodedStr[0:4])
-	if err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%04d", num%9000+1000), nil
+	// nolint:gosec
+	// Generate a random number between 0 and 9999
+	code := rand.Intn(10000)
+
+	// Format the number as a 4-digit string, padding with zeros if necessary
+	return fmt.Sprintf("%04d", code), nil
 }
