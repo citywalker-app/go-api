@@ -5,7 +5,7 @@ import (
 )
 
 func Get(user *userdomain.User) error {
-	if _, err := repo.GetByEmail(user.Email); err != nil {
+	if _, err := Repo.GetByEmail(user.Email); err != nil {
 		return userdomain.ErrUserNotFound
 	}
 

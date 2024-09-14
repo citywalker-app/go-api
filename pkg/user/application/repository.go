@@ -8,7 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2/log"
 )
 
-var repo = func() userdomain.Repository {
+var Repo = func() userdomain.Repository {
 	switch os.Getenv("DATABASE") {
 	case "MONGODB":
 		return mongo.NewMongoRepository()

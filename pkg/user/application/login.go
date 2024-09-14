@@ -6,7 +6,7 @@ import (
 )
 
 func Login(user *userdomain.User) error {
-	foundedUser, err := repo.GetByEmail(user.Email)
+	foundedUser, err := Repo.GetByEmail(user.Email)
 	if err != nil {
 		return userdomain.ErrUserNotFound
 	}
