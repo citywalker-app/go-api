@@ -4,6 +4,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/gofiber/fiber/v2/log"
 	"gopkg.in/gomail.v2"
 )
 
@@ -11,7 +12,7 @@ var d = func() *gomail.Dialer {
 	smtpEmail := os.Getenv("SMTP_SERVER")
 	smtpPort, err := strconv.Atoi(os.Getenv("SMTP_PORT"))
 	if err != nil {
-		panic(err)
+		log.Error(err)
 	}
 	smtpUsername := os.Getenv("SMTP_USERNAME")
 	smtpPass := os.Getenv("SMTP_PASSWORD")
