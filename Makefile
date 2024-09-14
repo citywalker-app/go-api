@@ -1,6 +1,8 @@
 include .env.dev
 include .env.prod
 
+.PHONY: test
+
 lint:
 	@golangci-lint run
 
@@ -18,5 +20,8 @@ run-dev:
 test:
 	@echo "Clearing test cache..."
 	@go clean -testcache
+	@echo "Raising test database..."
+	@docker-compose -f docker-compose.yml up -d
 	@echo "Testing..."
-	@ENV_FILE=../.env.dev go test ./... -coverprofile=coverage.out
+	@trap 'docker-compose -f docker-compose.yml down' EXIT; \
+	go test ./... -coverprofile=coverage.out
