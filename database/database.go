@@ -8,6 +8,7 @@ import (
 
 type Database interface {
 	Connect()
+	ConnectTest()
 	GetDB() interface{}
 }
 
