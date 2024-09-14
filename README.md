@@ -1,6 +1,6 @@
 # CityWalker API
 
-![Coverage test](./badges/test-coverage.svg)
+![Coverage test](./badges/coverage.svg)
 
 ## Getting Started
 
