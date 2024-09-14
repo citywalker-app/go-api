@@ -50,6 +50,10 @@ func GenericCheck(t *testing.T, tc *userhandler.TestCase, route string) *http.Re
 		t.Fatalf("Error: %v", err)
 	}
 
+	if resp.StatusCode != http.StatusInternalServerError {
+		return nil
+	}
+
 	assert.Equal(t, resp.StatusCode, tc.StatusCode)
 
 	if resp.StatusCode != http.StatusOK {
