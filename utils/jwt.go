@@ -9,7 +9,7 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-func GenerateJWT(email string) (*string, error) {
+func GenerateJWT(email string) (string, error) {
 	hourCount, ok := strconv.Atoi(os.Getenv("JWT_EXPIRE_HOUR_COUNT"))
 	if ok != nil {
 		log.Error("Error parsing JWT_EXPIRE_HOUR")
@@ -23,8 +23,8 @@ func GenerateJWT(email string) (*string, error) {
 
 	token, err := claims.SignedString([]byte(os.Getenv("JWT_SECRET_KEY")))
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	return &token, nil
+	return token, nil
 }
