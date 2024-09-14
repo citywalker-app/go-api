@@ -9,6 +9,6 @@ func Router(router fiber.Router) {
 	router.Post("/login", userhandler.Login())
 	router.Post("/register", userhandler.Register())
 	router.Post("/resetPassword", userhandler.ResetPassword())
-	router.Post("/code", userhandler.Code())
+	router.Post("/confirmCode", userhandler.ConfirmCode())
 	router.Post("/continueWithGoogle", userhandler.ContinueWithGoogle())
 }
