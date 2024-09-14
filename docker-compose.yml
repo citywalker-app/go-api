@@ -1,0 +1,7 @@
+version: "3.8"
+
+services:
+  mongo-test:
+    image: citywalkerdev/mongo-test:latest
+    ports:
+      - "27017:27017"
