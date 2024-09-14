@@ -56,6 +56,15 @@ jobs:
       - name: Install dependencies
         run: go mod download
 
+      - name: Set up Docker Compose
+        run: |
+          docker-compose --version
+
+      - name: Build and run Docker Compose
+        run: |
+          docker-compose up -f docker-compose.yml up --build -d
+          docker ps
+
       - name: Run tests with coverage
         run: |
           go clean -testcache
@@ -73,3 +82,8 @@ jobs:
         with:
           message: "style(badge): update coverage badge"
           add: "./badges/test-coverage.svg"
+
+      - name: Tear down Docker Compose
+        if: always()
+        run: |
+          docker-compose -f docker-compose.yml down
