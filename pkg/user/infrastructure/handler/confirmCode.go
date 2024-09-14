@@ -46,6 +46,8 @@ func ConfirmCode() fiber.Handler {
 			return utils.NewErrorHandler(c, ErrEmail, fiber.StatusInternalServerError)
 		}
 
-		return utils.NewSuccessHandler(c, map[string]interface{}{"confirmCode": code})
+		response := Response{ConfirmCode: user.Email}
+
+		return utils.NewSuccessHandler(c, response)
 	}
 }
