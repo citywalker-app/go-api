@@ -1,5 +1,7 @@
 # CityWalker API
 
+![Banner](https://ik.imagekit.io/aacivfepey/banner.png?updatedAt=1726422511159)
+
 [![CI](https://github.com/citywalker-app/go-api/actions/workflows/tescoverage.yaml/badge.svg)](https://github.com/citywalker-app/go-api/actions/workflows/tescoverage.yaml)
 ![Coverage test](./badges/coverage.svg)
 
