@@ -4,10 +4,14 @@ import (
 	"context"
 
 	citydomain "github.com/citywalker-app/go-api/pkg/city/domain"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 func (mo *Repository) GetCity(city string) (*citydomain.City, error) {
-	filter := map[string]interface{}{"city": city}
+	filter := bson.M{"city": bson.M{
+		"$regex":   city,
+		"$options": "i",
+	}}
 
 	result := mo.Collection.FindOne(context.Background(), filter)
 	if result.Err() != nil {
