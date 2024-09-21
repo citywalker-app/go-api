@@ -3,7 +3,7 @@ package cityapplication
 import citydomain "github.com/citywalker-app/go-api/pkg/city/domain"
 
 func GetCity(city *string) (*citydomain.City, error) {
-	cityFounded, err := repo.GetCity(*city)
+	cityFounded, err := Repo.GetCity(*city)
 	if err != nil {
 		return nil, err
 	}
