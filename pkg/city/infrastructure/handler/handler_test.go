@@ -44,11 +44,16 @@ func init() {
 	cityapplication.Repo = citymongo.NewMongoRepository()
 	userapplication.Repo = usermongo.NewMongoRepository()
 
+	jwt = login()
+}
+
+func login() string {
 	user := userdomain.User{
-		Email:    "test@gmail.com",
-		FullName: "Test User",
+		Email:    "testcity@gmail.com",
+		FullName: "Test",
 		Password: "12345689",
 	}
+
 	userJSON, _ := json.Marshal(user)
 	req, err := http.NewRequest(http.MethodPost, "/user/register", bytes.NewBuffer(userJSON))
 	if err != nil {
@@ -67,7 +72,7 @@ func init() {
 		panic(err)
 	}
 
-	jwt = response.JWT
+	return response.JWT
 }
 
 func TestMain(m *testing.M) {
