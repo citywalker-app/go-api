@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"strings"
 
 	"github.com/citywalker-app/go-api/utils"
@@ -16,8 +15,6 @@ func RedisHandler() func(*fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
 		path := c.Path()
 		cachedResponse, err := utils.RedisDB.Get(context.Background(), path).Bytes()
-
-		fmt.Println("called")
 
 		if errors.Is(err, redis.Nil) {
 			return c.Next()
