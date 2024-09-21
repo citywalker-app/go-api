@@ -11,7 +11,7 @@ func (mo *Repository) GetCity(city string) (*citydomain.City, error) {
 
 	result := mo.Collection.FindOne(context.Background(), filter)
 	if result.Err() != nil {
-		return nil, ErrCitiesNotFound
+		return nil, ErrCityNotFound
 	}
 
 	var cityFounded citydomain.City
