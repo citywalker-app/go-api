@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-func (t *Travel) GetTotalMinutes() uint16 {
+func (t *Travel) GetTotalMinutes() int16 {
 	totalMinutes := 0.0
 	start := t.Schedule.StartDate
 	end := t.Schedule.EndDate
@@ -25,5 +25,5 @@ func (t *Travel) GetTotalMinutes() uint16 {
 	// minutes of the last day
 	totalMinutes += t.Schedule.EndDateTime.Sub(t.Schedule.StartTime).Minutes()
 
-	return uint16(totalMinutes)
+	return int16(totalMinutes)
 }
