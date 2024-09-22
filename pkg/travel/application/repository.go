@@ -5,6 +5,7 @@ import (
 
 	traveldomain "github.com/citywalker-app/go-api/pkg/travel/domain"
 	"github.com/citywalker-app/go-api/pkg/travel/infrastructure/persistence/mongo"
+	"github.com/gofiber/fiber/v2/log"
 )
 
 var Repo = func() traveldomain.Repository {
@@ -12,6 +13,7 @@ var Repo = func() traveldomain.Repository {
 	case "MONGODB":
 		return mongo.NewMongoRepository()
 	default:
-		panic("Unsupported database: modify .env file")
+		log.Panic("Unsupported database: modify .env file")
+		return nil
 	}
 }()
