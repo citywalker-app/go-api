@@ -16,7 +16,7 @@ func Create() fiber.Handler {
 			return utils.NewErrorHandler(c, ErrBadRequest, fiber.StatusBadRequest)
 		}
 
-		if err := validator.New().StructPartial(&travel); err != nil {
+		if err := validator.New().Struct(&travel); err != nil {
 			return utils.NewErrorHandler(c, ErrBadRequest, fiber.StatusBadRequest)
 		}
 
