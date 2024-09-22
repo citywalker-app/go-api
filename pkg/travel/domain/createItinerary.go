@@ -15,11 +15,11 @@ func (t *Travel) CreateItinerary(city *citydomain.City) error {
 			break
 		}
 
-		if shouldSkipPlace(t, place, totalMinutes, *city) {
+		if shouldSkipPlace(t, place, totalMinutes) {
 			continue
 		}
 
-		visitDuration := getVisitDuration(t, place, *city)
+		visitDuration := getVisitDuration(t, place)
 		placesToVisit = append(placesToVisit, place)
 		totalMinutes -= visitDuration
 	}
@@ -29,61 +29,25 @@ func (t *Travel) CreateItinerary(city *citydomain.City) error {
 	return err
 }
 
-func shouldSkipPlace(t *Travel, place citydomain.Place, totalMinutes uint16, city citydomain.City) bool {
+func shouldSkipPlace(t *Travel, place citydomain.Place, totalMinutes int16) bool {
 	if utils.Includes(t.ExcludedCategories, place.Category) {
 		return true
 	}
 
 	if utils.Includes(t.MustVisitPlaces, place.Name) {
-		return place.Visit.All+city.AverageCost > totalMinutes
+		return place.Visit.All+10 > totalMinutes
 	}
 
 	if place.Visit.Outside == 0 {
 		return true
 	}
 
-	return place.Visit.Outside+city.AverageCost > totalMinutes
+	return place.Visit.Outside+10 > totalMinutes
 }
 
-func getVisitDuration(t *Travel, place citydomain.Place, city citydomain.City) uint16 {
+func getVisitDuration(t *Travel, place citydomain.Place) int16 {
 	if utils.Includes(t.MustVisitPlaces, place.Name) {
-		return place.Visit.All + city.AverageCost
+		return place.Visit.All + 10
 	}
-	return place.Visit.Outside + city.AverageCost
+	return place.Visit.Outside + 10
 }
-
-// func (t *Travel) CreateItinerary(city *citydomain.City) error {
-// 	totalMinutes := t.GetTotalMinutes()
-
-// 	placesToVisit := []citydomain.Place{}
-
-// 	for _, place := range city.Places {
-// 		if totalMinutes > 0 {
-// 			if utils.Includes(t.DiscardedCategories, place.Category) {
-// 				continue
-// 			}
-// 			if utils.Includes(t.PlacesToEnter, place.Name) {
-// 				if place.Visit.All+city.AverageCost > totalMinutes {
-// 					continue
-// 				}
-// 				placesToVisit = append(placesToVisit, place)
-// 				totalMinutes -= place.Visit.All + city.AverageCost
-// 				continue
-// 			}
-// 			if place.Visit.Outside == 0 {
-// 				continue
-// 			}
-// 			if place.Visit.Outside+city.AverageCost > totalMinutes {
-// 				continue
-// 			}
-// 			placesToVisit = append(placesToVisit, place)
-// 			totalMinutes -= place.Visit.Outside + city.AverageCost
-// 		} else {
-// 			break
-// 		}
-// 	}
-
-// 	err := t.GetTSPTWSolve(&placesToVisit)
-
-// 	return err
-// }
