@@ -37,7 +37,7 @@ type Place struct {
 	} `json:"location"`
 	Visit struct {
 		Schedule [][]string `json:"schedule"`
-		All      uint16     `json:"all"`
-		Outside  uint16     `json:"outside"`
+		All      int16      `json:"all"`
+		Outside  int16      `json:"outside"`
 	} `json:"visit"`
 }
