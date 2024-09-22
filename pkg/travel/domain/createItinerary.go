@@ -7,8 +7,19 @@ import (
 
 func (t *Travel) CreateItinerary(city *citydomain.City) error {
 	totalMinutes := t.GetTotalMinutes()
-
 	placesToVisit := []citydomain.Place{}
+	var visitDuration int16
+
+	for _, place := range t.MustVisitPlaces {
+		for i, cityPlace := range city.Places {
+			if place == cityPlace.Name {
+				visitDuration = getVisitDuration(t, cityPlace)
+				placesToVisit = append(placesToVisit, cityPlace)
+				totalMinutes -= visitDuration
+				city.Places = append(city.Places[:i], city.Places[i+1:]...)
+			}
+		}
+	}
 
 	for _, place := range city.Places {
 		if totalMinutes <= 0 {
@@ -19,7 +30,7 @@ func (t *Travel) CreateItinerary(city *citydomain.City) error {
 			continue
 		}
 
-		visitDuration := getVisitDuration(t, place)
+		visitDuration = getVisitDuration(t, place)
 		placesToVisit = append(placesToVisit, place)
 		totalMinutes -= visitDuration
 	}
