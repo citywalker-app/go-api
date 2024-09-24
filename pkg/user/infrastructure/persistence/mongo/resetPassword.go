@@ -16,7 +16,6 @@ func (mo *Repository) ResetPassword(user *userdomain.User) error {
 	}
 
 	result, err := mo.Collection.UpdateOne(context.Background(), filter, update)
-
 	if err != nil {
 		return err
 	}
