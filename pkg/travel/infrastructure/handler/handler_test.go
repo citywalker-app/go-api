@@ -30,6 +30,12 @@ var (
 	jwt string
 )
 
+var user = userdomain.User{
+	Email:    "testtravel@gmail.com",
+	FullName: "Test",
+	Password: "12345689",
+}
+
 func init() {
 	os.Setenv("MDB_COLLECTION_TRAVELS", "travels")
 	os.Setenv("MDB_COLLECTION_USERS", "users")
@@ -48,16 +54,10 @@ func init() {
 	userapplication.Repo = usermongo.NewMongoRepository()
 	travelapplication.Repo = travelmongo.NewMongoRepository()
 
-	jwt = login()
+	jwt = register()
 }
 
-func login() string {
-	user := userdomain.User{
-		Email:    "testtravel@gmail.com",
-		FullName: "Test",
-		Password: "12345689",
-	}
-
+func register() string {
 	userJSON, _ := json.Marshal(user)
 	req, err := http.NewRequest(http.MethodPost, "/user/register", bytes.NewBuffer(userJSON))
 	if err != nil {
@@ -158,4 +158,26 @@ func TestCreate(t *testing.T) {
 			assert.Equal(t, true, IsIncluidingPlace(&response.Travel))
 		})
 	}
+}
+
+func TestTravelAddedtoUser(t *testing.T) {
+	userJSON, _ := json.Marshal(user)
+	req, err := http.NewRequest(http.MethodPost, "/user/login", bytes.NewBuffer(userJSON))
+	if err != nil {
+		panic(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := app.Test(req, -1)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	var response userhandler.Response
+	if err := json.NewDecoder(resp.Body).Decode(&response); err != nil {
+		panic(err)
+	}
+	emptyArray := make([]string, 0)
+	assert.NotEqual(t, len(emptyArray), len(response.User.Travels))
 }
